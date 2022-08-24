@@ -37,7 +37,6 @@ const LoginButton = ({
   updateUser: (userId: number) => void;
 }) => {
   const record = useRecordContext();
-  console.log("the record:", record);
   const loginHandler = () => {
     axios
       .post(
