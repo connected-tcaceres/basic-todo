@@ -6,22 +6,25 @@
   "private": true,
   "license": "UNLICENSED",
   "scripts": {
+    "docs": "npx @compodoc/compodoc -p tsconfig.json -s",
+    "migrate:sqlite": "dotenv -e .env.test -- npx prisma migrate dev --name init",
     "prebuild": "rimraf dist",
     "build": "nest build",
     "format": "prettier --write \"src/**/*.ts\" \"test/**/*.ts\"",
     "start": "nest start",
-    "start:dev": "nest start --watch",
+    "start:dev": "NODE_ENV=development nest start --watch",
     "start:debug": "nest start --debug --watch",
     "start:prod": "node dist/main",
     "lint": "eslint \"{src,apps,libs,test}/**/*.ts\" --fix",
-    "test": "jest",
-    "test:watch": "jest --watch",
-    "test:cov": "jest --coverage",
-    "test:debug": "node --inspect-brk -r tsconfig-paths/register -r ts-node/register node_modules/.bin/jest --runInBand",
-    "test:e2e": "jest --config ./test/jest-e2e.json"
+    "test": "NODE_ENV=test dotenv -e .env.test -- jest",
+    "test:watch": "NODE_ENV=test dotenv -e .env.test -- jest --watch",
+    "test:cov": "NODE_ENV=test dotenv -e .env.test -- jest --coverage",
+    "test:debug": "NODE_ENV=test dotenv -e .env.test node --inspect-brk -r tsconfig-paths/register -r ts-node/register node_modules/.bin/jest --runInBand",
+    "test:e2e": "NODE_ENV=test dotenv -e .env.test -- jest --config ./test/jest-e2e.json"
   },
   "dependencies": {
     "@nestjs/common": "^9.0.0",
+    "@nestjs/config": "^2.2.0",
     "@nestjs/core": "^9.0.0",
     "@nestjs/jwt": "^9.0.0",
     "@nestjs/mapped-types": "*",
@@ -32,6 +35,7 @@
     "class-transformer": "^0.5.1",
     "class-validator": "^0.13.2",
     "cookie-parser": "^1.4.6",
+    "dotenv-cli": "^6.0.0",
     "passport": "^0.6.0",
     "passport-jwt": "^4.0.0",
     "query-string": "^7.1.1",
@@ -40,6 +44,7 @@
     "rxjs": "^7.2.0"
   },
   "devDependencies": {
+    "@compodoc/compodoc": "^1.1.19",
     "@nestjs/cli": "^9.0.0",
     "@nestjs/schematics": "^9.0.0",
     "@nestjs/testing": "^9.0.0",
