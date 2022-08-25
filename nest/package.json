@@ -6,6 +6,7 @@
   "private": true,
   "license": "UNLICENSED",
   "scripts": {
+    "seed": "NODE_ENV=development dotenv -e .env.development -- ts-node prisma/seed/seed.ts",
     "docs": "npx @compodoc/compodoc -p tsconfig.json -s",
     "migrate:sqlite": "dotenv -e .env.test -- npx prisma migrate dev --name init",
     "prebuild": "rimraf dist",

@@ -16,7 +16,7 @@ describe('UserService', () => {
   });
 
   afterEach(async () => {
-    await prismaService.user.deleteMany();
+    await prismaService.user();
   });
 
   it('can create an instance of the user service', () => {
